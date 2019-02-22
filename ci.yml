@@ -4,6 +4,7 @@ steps:
       version: $(go_version)
   - task: Bash@3
     inputs:
+      targetType: inline
       script: |
         mkdir -p '$(GOBIN)'
         mkdir -p '$(GOPATH)/pkg'
