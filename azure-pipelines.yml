@@ -28,21 +28,4 @@ jobs:
       go 1.10:
         go_version: '1.10'
   steps:
-    - task: GoTool@0
-      inputs:
-        version: $(go_version)
-    - script: |
-        mkdir -p '$(GOBIN)'
-        mkdir -p '$(GOPATH)/pkg'
-        mkdir -p '$(modulePath)'
-        shopt -s extglob
-        mv !(gopath) '$(modulePath)'
-        echo '##vso[task.prependpath]$(GOBIN)'
-        echo '##vso[task.prependpath]$(GOROOT)/bin'
-    - script: |
-        echo $GOPATH
-        pwd
-        ls -la
-        go get -t -v ./...
-        go test -v ./...
-      workingDirectory: '$(modulePath)'
+    - template: ci.yml

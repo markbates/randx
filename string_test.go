@@ -16,7 +16,6 @@ func Test_String(t *testing.T) {
 	r := require.New(t)
 	r.Len(String(5), 5)
 	r.Len(String(50), 50)
-	t.Fail()
 }
 
 func Test_String_Parallel(t *testing.T) {
