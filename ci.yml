@@ -23,12 +23,12 @@ steps:
     inputs:
       command: "get"
       arguments: "-v -t ./..."
-      workingDirectory:
+      workingDirectory: $(modulePath)
     displayName: "Go Get"
   - task: Go@0
     inputs:
       command: "test"
       arguments: "-v ./..."
-      workingDirectory:
+      workingDirectory: $(modulePath)
     displayName: "Go Test"
 

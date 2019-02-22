@@ -16,14 +16,7 @@ jobs:
       go 1.11:
         go_version: '1.11'
   steps:
-  - task: GoTool@0
-    inputs:
-      version: $(go_version)
-  - script: |
-      go get -t -v ./...
-      go test -v ./...
-    workingDirectory: '$(modulePath)'
-    displayName: "Tests"
+    - template: 'ci.yml'
 
 - job: macOS
   pool:
