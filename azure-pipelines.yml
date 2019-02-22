@@ -3,7 +3,8 @@ jobs:
   pool:
     vmImage: 'vs2017-win2016'
   steps:
-   - script: ci.sh
+   - script: |
+     go get -t -v -u ./...
 - job: macOS
   pool:
     vmImage: 'macOS-10.13'
