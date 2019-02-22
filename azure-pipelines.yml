@@ -7,7 +7,7 @@ resources:
 
 jobs:
 - job: job_container
-  container: $[variables['runtimeContainer']]
+  container: 'vs2017-win2016'
   pool:
     vmImage: 'vs2017-win2016'
     matrix:
