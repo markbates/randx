@@ -28,12 +28,6 @@ jobs:
         go_version: '1.10'
       go 1.11:
         go_version: '1.11'
-        env:
-          GO111MODULES: off
-      go 1.11 (on):
-        go_version: '1.11'
-        env:
-          GO111MODULES: on
   steps:
     - template: ci.yml
 - job: Linux
@@ -47,5 +41,9 @@ jobs:
         go_version: '1.10'
       go 1.11:
         go_version: '1.11'
+        GO111MODULE: "on"
+      go 1.11 (off):
+        go_version: '1.11'
+        GO111MODULE: "off"
   steps:
     - template: ci.yml
