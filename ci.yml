@@ -14,11 +14,11 @@ steps:
         echo '##vso[task.prependpath]$(GOBIN)'
         echo '##vso[task.prependpath]$(GOROOT)/bin'
       displayName: "Setup Go Workspace"
-  # - script: |
-  #     echo $GOPATH
-  #     pwd
-  #     ls -la
-  #     go get -t -v ./...
-  #     go test -v ./...
-  #   workingDirectory: '$(modulePath)'
-  #   displayName: "Tests"
+  - script: |
+      echo $GOPATH
+      pwd
+      ls -la
+      go get -t -v ./...
+      go test -v ./...
+    workingDirectory: '$(modulePath)'
+    displayName: "Tests"
