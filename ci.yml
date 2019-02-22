@@ -30,5 +30,6 @@ steps:
       command: "test"
       arguments: "-v ./..."
       workingDirectory: $(modulePath)
+    - script: pwd
     displayName: "Go Test"
 
