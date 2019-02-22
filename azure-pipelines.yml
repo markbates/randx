@@ -32,6 +32,14 @@ jobs:
       inputs:
         version: $(go_version)
     - script: |
+        mkdir -p '$(GOBIN)'
+        mkdir -p '$(GOPATH)/pkg'
+        mkdir -p '$(modulePath)'
+        shopt -s extglob
+        mv !(gopath) '$(modulePath)'
+        echo '##vso[task.prependpath]$(GOBIN)'
+        echo '##vso[task.prependpath]$(GOROOT)/bin'
+    - script: |
         echo $GOPATH
         pwd
         ls -la
