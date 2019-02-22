@@ -18,7 +18,12 @@ jobs:
 - job: Linux
   pool:
     vmImage: 'ubuntu-16.04'
-  container: golang:1.11
+  strategy:
+    matrix:
+      ruby 2.3:
+        go_version: '1.9'
+      ruby 2.4:
+        go_version: '1.10'
   steps:
   - script: |
       go get -u -t -v ./...
