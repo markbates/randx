@@ -1,23 +1,29 @@
+resources:
+  containers:
+  - container: u14
+    image: ubuntu:14.04
+
+  - container: u16
+    image: ubuntu:16.04
+
+  - container: u18
+    image: ubuntu:18.04
+
 jobs:
-- job: Windows
-  pool:
-    vmImage: 'vs2017-win2016'
-  steps:
-  - script: |
-      go get -u -t -v ./...
-      go test -v ./...
-- job: macOS
-  pool:
-    vmImage: 'macOS-10.13'
-  steps:
-  - script: |
-      go get -u -t -v ./...
-      go test -v ./...
-- job: Linux
+- job: RunInContainer
   pool:
     vmImage: 'ubuntu-16.04'
-  container: golang:1.9
+
+  strategy:
+    matrix:
+      ubuntu14:
+        containerResource: u14
+      ubuntu16:
+        containerResource: u16
+      ubuntu18:
+        containerResource: u18
+
+  container: $[ variables['containerResource'] ]
+
   steps:
-  - script: |
-      go get -u -t -v ./...
-      go test -v ./...
+    - script: printenv
