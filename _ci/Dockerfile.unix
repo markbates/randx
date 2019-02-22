@@ -1,3 +1,6 @@
 FROM golang:1.11
 
-RUN echo Hello
+RUN pwd
+
+RUN go get -u -t -v ./...
+RUN go test -v ./...

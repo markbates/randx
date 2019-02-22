@@ -1,46 +1,20 @@
-resources:
-  containers:
-  - container: ugo111
-    image: golang:1.11
-  - container: ugo110
-    image: golang:1.10
-
 jobs:
-- job: job_container
-  container: $[variables['runtimeContainer']]
+- job: Windows
   pool:
     vmImage: 'vs2017-win2016'
-    matrix:
-      container_1:
-        runtimeContainer: ugo111
-      container_2:
-        runtimeContainer: ugo110
   steps:
   - script: |
       go get -u -t -v ./...
       go test -v ./...
-# jobs:
-# - job: Windows
-#   pool:
-#     vmImage: 'vs2017-win2016'
-#   steps:
-#   - script: |
-#       go get -u -t -v ./...
-#       go test -v ./...
-# - job: macOS
-#   pool:
-#     vmImage: 'macOS-10.13'
-#   steps:
-#   - script: |
-#       go get -u -t -v ./...
-#       go test -v ./...
-# - job: Linux
-#   pool:
-#     vmImage: 'ubuntu-16.04'
-#   - task: GoTool@0
-#     inputs:
-#       version: '1.10'
-#   steps:
-#   - script: |
-#       go get -u -t -v ./...
-#       go test -v ./...
+- job: macOS
+  pool:
+    vmImage: 'macOS-10.13'
+  steps:
+  - script: |
+      go get -u -t -v ./...
+      go test -v ./...
+- job: Linux
+  pool:
+    vmImage: 'ubuntu-16.04'
+  steps:
+  - script: docker build -f _ci/Dockerfile.unix -t .
