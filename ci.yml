@@ -2,6 +2,7 @@ steps:
   - task: GoTool@0
     inputs:
       version: $(go_version)
+    - script: ci.sh
   # - script: |
   #     mkdir -p '$(GOBIN)'
   #     mkdir -p '$(GOPATH)/pkg'
@@ -19,17 +20,16 @@ steps:
   #     go test -v ./...
   #   workingDirectory: '$(modulePath)'
   #   displayName: "Tests"
-  - task: Go@0
-    inputs:
-      command: "get"
-      arguments: "-v -t ./..."
-      workingDirectory: $(modulePath)
-    displayName: "Go Get"
-  - task: Go@0
-    inputs:
-      command: "test"
-      arguments: "-v ./..."
-      workingDirectory: $(modulePath)
-    - script: pwd
-    displayName: "Go Test"
-
+  # - task: Go@0
+  #   inputs:
+  #     command: "get"
+  #     arguments: "-v -t ./..."
+  #     workingDirectory: $(modulePath)
+  #   displayName: "Go Get"
+  # - task: Go@0
+  #   inputs:
+  #     command: "test"
+  #     arguments: "-v ./..."
+  #     workingDirectory: $(modulePath)
+  #   displayName: "Go Test"
+  #
