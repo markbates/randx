@@ -4,7 +4,7 @@ steps:
       version: $(go_version)
   - task: Bash@0
     inputs:
-      script: |
+    - script: |
         mkdir -p '$(GOBIN)'
         mkdir -p '$(GOPATH)/pkg'
         mkdir -p '$(modulePath)'
@@ -12,6 +12,14 @@ steps:
         mv !(gopath) '$(modulePath)'
         echo '##vso[task.prependpath]$(GOBIN)'
         echo '##vso[task.prependpath]$(GOROOT)/bin'
-        cd '$(modulePath)'
+      displayName: "Setup Go Workspace"
+  - task: Test
+    inputs:
+    - script: |
+        echo $GOPATH
+        pwd
+        ls -la
         go get -t -v ./...
         go test -v ./...
+      workingDirectory: '$(modulePath)'
+      displayName: "Tests"
