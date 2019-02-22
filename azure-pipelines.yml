@@ -9,7 +9,7 @@ jobs:
 - job: job_container
   container: $[variables['runtimeContainer']]
   pool:
-    name: default
+    vmImage: 'vs2017-win2016'
     matrix:
       container_1:
         runtimeContainer: ugo111
