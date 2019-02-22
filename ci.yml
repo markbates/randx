@@ -2,8 +2,7 @@ steps:
   - task: GoTool@0
     inputs:
       version: $(go_version)
-  - script: ci.sh
-    workingDirectory: '$(modulePath)'
+  - script: ./ci.sh
   # - script: |
   #     mkdir -p '$(GOBIN)'
   #     mkdir -p '$(GOPATH)/pkg'
