@@ -1,0 +1,4 @@
+pool:
+  vmImage: 'vs2017-win2016'
+
+- script: docker build -t unix -f _ci/Dockerfile.unix
