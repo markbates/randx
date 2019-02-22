@@ -16,7 +16,6 @@ jobs:
       go 1.11:
         go_version: '1.11'
   steps:
-  - script: |
     - template: ci.yml
 - job: macOS
   pool:
@@ -36,7 +35,6 @@ jobs:
         env:
           GO111MODULES: on
   steps:
-  - script: |
     - template: ci.yml
 - job: Linux
   pool:
