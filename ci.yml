@@ -2,16 +2,17 @@ steps:
   - task: GoTool@0
     inputs:
       version: $(go_version)
-  - script: ./ci.sh
-  # - script: |
-  #     mkdir -p '$(GOBIN)'
-  #     mkdir -p '$(GOPATH)/pkg'
-  #     mkdir -p '$(modulePath)'
-  #     shopt -s extglob
-  #     mv !(gopath) '$(modulePath)'
-  #     echo '##vso[task.prependpath]$(GOBIN)'
-  #     echo '##vso[task.prependpath]$(GOROOT)/bin'
-  #   displayName: "Setup Go Workspace"
+  - task: Bash@3
+    inputs:
+    script: |
+        mkdir -p '$(GOBIN)'
+        mkdir -p '$(GOPATH)/pkg'
+        mkdir -p '$(modulePath)'
+        shopt -s extglob
+        mv !(gopath) '$(modulePath)'
+        echo '##vso[task.prependpath]$(GOBIN)'
+        echo '##vso[task.prependpath]$(GOROOT)/bin'
+      displayName: "Setup Go Workspace"
   # - script: |
   #     echo $GOPATH
   #     pwd
