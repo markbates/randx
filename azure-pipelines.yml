@@ -17,4 +17,4 @@ jobs:
   pool:
     vmImage: 'ubuntu-16.04'
   steps:
-  - script: docker build -f _ci/Dockerfile.unix -t .
+  - script: docker build -f _ci/Dockerfile.unix .
