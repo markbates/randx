@@ -20,4 +20,5 @@ steps:
   #   workingDirectory: '$(modulePath)'
   #   displayName: "Tests"
   - task: Go@0
-    workingDirectory:
+    inputs:
+      workingDirectory:
