@@ -2,9 +2,10 @@ FROM golang:1.11
 
 RUN pwd
 
-RUN mkdir -p $GOPATH/src/github.com/markbates
-WORKDIR $GOPATH/src/github.com/markbates
+ENV REPO github.com/markbates/randx
+ENV WD $GOPATH/src/$REPO
+RUN go get -u -v -t REPO
 RUN ls -la
-
+WORKDIR $WD
 RUN go get -u -t -v ./...
 RUN go test -v ./...
