@@ -10,6 +10,7 @@ steps:
       mv !(gopath) '$(modulePath)'
       echo '##vso[task.prependpath]$(GOBIN)'
       echo '##vso[task.prependpath]$(GOROOT)/bin'
+    displayName: "Setup Go Workspace"
   - script: |
       echo $GOPATH
       pwd

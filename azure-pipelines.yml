@@ -7,17 +7,37 @@ jobs:
 - job: Windows
   pool:
     vmImage: 'vs2017-win2016'
+  strategy:
+    matrix:
+      go 1.9:
+        go_version: '1.9'
+      go 1.10:
+        go_version: '1.10'
+      go 1.11:
+        go_version: '1.11'
   steps:
   - script: |
-      go get -u -t -v ./...
-      go test -v ./...
+    - template: ci.yml
 - job: macOS
   pool:
     vmImage: 'macOS-10.13'
+  strategy:
+    matrix:
+      go 1.9:
+        go_version: '1.9'
+      go 1.10:
+        go_version: '1.10'
+      go 1.11:
+        go_version: '1.11'
+        env:
+          GO111MODULES: off
+      go 1.11 (on):
+        go_version: '1.11'
+        env:
+          GO111MODULES: on
   steps:
   - script: |
-      go get -u -t -v ./...
-      go test -v ./...
+    - template: ci.yml
 - job: Linux
   pool:
     vmImage: 'ubuntu-16.04'
@@ -27,5 +47,7 @@ jobs:
         go_version: '1.9'
       go 1.10:
         go_version: '1.10'
+      go 1.11:
+        go_version: '1.11'
   steps:
     - template: ci.yml
