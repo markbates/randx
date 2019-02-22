@@ -15,14 +15,8 @@ jobs:
       go test -v ./...
 - job: Linux
   pool:
-    vmImage: 'golang:1.11'
-  steps:
-  - script: |
-      go get -u -t -v ./...
-      go test -v ./...
-- job: Linux110
-  pool:
-    vmImage: 'golang:1.10'
+    vmImage: 'ubuntu-16.04'
+  container: golang:1.9
   steps:
   - script: |
       go get -u -t -v ./...
