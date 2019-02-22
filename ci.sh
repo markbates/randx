@@ -2,10 +2,10 @@
 
 set -xe
 
-echo $modulePath
+echo $(modulePath)
 mkdir -p $GOBIN
 mkdir -p $GOPATH/pkg
-mkdir -p $modulePath
+mkdir -p $(modulePath)
 pwd
 ls -la
 echo $GOPATH
