@@ -32,8 +32,8 @@ jobs:
       inputs:
         version: $(go_version)
     - script: |
+        echo $GOPATH
         pwd
         ls -la
         go get -u -t -v ./...
         go test -v ./...
-      workingDirectory: '$(modulePath)'
