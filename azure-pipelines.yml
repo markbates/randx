@@ -19,8 +19,27 @@ jobs:
       go 1.11 (off):
         go_version: '1.11'
         GO111MODULE: "off"
-  steps:
-    - template: 'ci.yml'
+  steps: &doWork
+    - task: GoTool@0
+      inputs:
+        version: $(go_version)
+    - task: Bash@3
+      inputs:
+        targetType: inline
+        script: |
+          mkdir -p '$(GOBIN)'
+          mkdir -p '$(GOPATH)/pkg'
+          mkdir -p '$(modulePath)'
+          shopt -s extglob
+          mv !(gopath) '$(modulePath)'
+          echo '##vso[task.prependpath]$(GOBIN)'
+          echo '##vso[task.prependpath]$(GOROOT)/bin'
+      displayName: "Setup Go Workspace"
+    - script: |
+        go get -t -v ./...
+        go test -v ./...
+      workingDirectory: '$(modulePath)'
+      displayName: "Tests"
 
 - job: macOS
   pool:
@@ -37,8 +56,8 @@ jobs:
       go 1.11 (off):
         go_version: '1.11'
         GO111MODULE: "off"
-  steps:
-    - template: ci.yml
+  <<: *doWork
+
 - job: Linux
   pool:
     vmImage: 'ubuntu-16.04'
@@ -54,5 +73,4 @@ jobs:
       go 1.11 (off):
         go_version: '1.11'
         GO111MODULE: "off"
-  steps:
-    - template: ci.yml
+  <<: *doWork
