@@ -3,7 +3,7 @@ FROM golang:1.11
 RUN pwd
 
 RUN mkdir -p $GOPATH/src/github.com/markbates
-CD $GOPATH/src/github.com/markbates
+WORKDIR $GOPATH/src/github.com/markbates
 RUN ls -la
 
 RUN go get -u -t -v ./...
