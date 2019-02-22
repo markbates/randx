@@ -4,29 +4,7 @@ variables:
   modulePath: '$(GOPATH)/src/github.com/$(build.repository.name)' # Path to the module's code
 
 jobs:
-- job: Windows
-  pool:
-    vmImage: 'vs2017-win2016'
-  steps:
-  - script: |
-      go get -u -t -v ./...
-      go test -v ./...
-- job: macOS
-  pool:
-    vmImage: 'macOS-10.13'
-  steps:
-  - script: |
-      go get -u -t -v ./...
-      go test -v ./...
-- job: Linux
-  pool:
-    vmImage: 'ubuntu-16.04'
-  strategy:
-    matrix:
-      go 1.9:
-        go_version: '1.9'
-      go 1.10:
-        go_version: '1.10'
+- job: setup
   steps:
     - task: GoTool@0
       inputs:
@@ -46,3 +24,35 @@ jobs:
         go get -t -v ./...
         go test -v ./...
       workingDirectory: '$(modulePath)'
+      displayName: "Tests"
+
+- job: Windows
+  pool:
+    vmImage: 'vs2017-win2016'
+  steps:
+  - script: |
+      go get -u -t -v ./...
+      go test -v ./...
+- job: macOS
+  pool:
+    vmImage: 'macOS-10.13'
+  steps:
+  - script: |
+      go get -u -t -v ./...
+      go test -v ./...
+- job: Linux
+  dependsOn: setup
+  pool:
+    vmImage: 'ubuntu-16.04'
+  strategy:
+    matrix:
+      go 1.9:
+        go_version: '1.9'
+      go 1.10:
+        go_version: '1.10'
+  steps:
+    - script: |
+        go get -t -v ./...
+        go test -v ./...
+      workingDirectory: '$(modulePath)'
+      displayName: "Tests"
