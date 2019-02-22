@@ -21,4 +21,14 @@ steps:
   #   displayName: "Tests"
   - task: Go@0
     inputs:
+      command: "get"
+      arguments: "-v -t ./..."
       workingDirectory:
+    displayName: "Go Get"
+  - task: Go@1
+    inputs:
+      command: "test"
+      arguments: "-v ./..."
+      workingDirectory:
+    displayName: "Go Test"
+
