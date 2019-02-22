@@ -1,0 +1,6 @@
+#! /bin/bash
+
+set -xe
+
+go get -v -t ./...
+go test -v  -timeout=5s -race ./...
