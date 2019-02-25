@@ -5,10 +5,10 @@ import (
 	"math/rand"
 )
 
-func RandomError() error {
+func RandomError(n int) error {
 	x := rand.Int()
-	if x%3 == 0 {
-		return fmt.Errorf("%d is divisable by 3", x)
+	if x%n == 0 {
+		return fmt.Errorf("%d is divisable by %d", x, n)
 	}
 	return nil
 }
